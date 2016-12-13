@@ -4,7 +4,7 @@ new Vue({
     event: {name: '', description: '', date: ''},
     events: []
   },
-  ready: function() {
+  mounted: function() {
     this.fetchEvents();
   },
   methods: {
@@ -29,12 +29,17 @@ new Vue({
           date: '2016-03-11'
         }
       ];
-      this.$set('events', events);
+      this.events = events;
     },
     addEvent: function() {
       if (this.event.name) {
         this.events.push(this.event);
         this.event = {name: '', description: '', date: ''};
+      }
+    },
+    deleteEvent: function(index) {
+      if (confirm('Are you sure you want to delete this event?')) {
+        this.events.splice(index, 1);
       }
     }
   }
